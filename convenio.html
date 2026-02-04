@@ -3,199 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso Restringido - Contrato COCONET</title>
+    <title>Contrato Distribución - COCONET</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        
-        /* Estilos para impresión */
-        @media print {
-            #login-screen { display: none !important; }
-            #main-content { display: block !important; }
-            .no-print { display: none !important; }
-            body { background: white; }
-            .contract-page { box-shadow: none !important; margin: 0 !important; width: 100% !important; }
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
+
+        :root {
+            --brand-blue: #003366;
         }
 
-        .clause-header {
-            color: #1e3a8a;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            margin-top: 1rem;
-            margin-bottom: 0.4rem;
-            border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 0.1rem;
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8fafc;
         }
 
         .contract-text {
-            text-align: justify;
-            line-height: 1.4;
-            font-size: 0.85rem;
-            color: #1f2937;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #1a202c;
         }
 
-        .commission-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 0.5rem 0;
-            font-size: 0.75rem;
+        .clause-title {
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 12px;
+            color: #003366;
+            border-bottom: 1px solid #e2e8f0;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            padding-bottom: 2px;
         }
-        .commission-table th, .commission-table td {
-            border: 1px solid #e2e8f0;
-            padding: 8px;
-            text-align: center;
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background-color: white !important; }
+            #main-container { padding: 0 !important; margin: 0 !important; max-width: 100% !important; }
+            .paper { box-shadow: none !important; border: none !important; padding: 1cm !important; }
+            .page-break { page-break-before: always; }
+        }
+
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 7rem;
+            color: rgba(0, 51, 102, 0.03);
+            pointer-events: none;
+            font-weight: 900;
+            z-index: 0;
+            white-space: nowrap;
         }
     </style>
 </head>
-<body class="bg-slate-100 min-h-screen">
+<body>
 
-    <!-- Pantalla de Inicio de Sesión -->
-    <div id="login-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900 px-4">
-        <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-sm w-full text-center">
-            <div class="mb-6">
-                <h1 class="text-2xl font-extrabold text-blue-900 italic">COCONET</h1>
-                <p class="text-xs text-gray-500 font-bold uppercase tracking-widest mt-1">Acceso Restringido</p>
-            </div>
-            <p class="text-sm text-gray-600 mb-6">Por favor, introduzca la contraseña para ver el contrato de distribución.</p>
-            <input type="password" id="passwordInput" 
-                   class="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:ring-2 focus:ring-blue-500 outline-none text-center"
-                   placeholder="Contraseña"
-                   onkeypress="if(event.key === 'Enter') checkPassword()">
-            <button onclick="checkPassword()" 
-                    class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition duration-200">
-                Entrar
-            </button>
-            <p id="errorMessage" class="text-red-500 text-xs mt-4 hidden italic">Contraseña incorrecta. Intente de nuevo.</p>
+    <!-- Pantalla de Seguridad -->
+    <div id="auth-screen" class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900">
+        <div class="bg-white p-10 rounded-2xl shadow-2xl max-w-sm w-full mx-4 text-center border-t-4 border-blue-900">
+            <h1 class="text-2xl font-black text-blue-900 italic mb-6">COCONET <span class="text-red-600">SECURE</span></h1>
+            <input type="password" id="passInput" 
+                   class="w-full bg-slate-100 border-none p-4 rounded-xl mb-4 text-center text-lg font-bold tracking-widest outline-none focus:ring-2 focus:ring-blue-600"
+                   placeholder="CONTRASEÑA"
+                   onkeypress="if(event.key === 'Enter') validateAccess()">
+            <button onclick="validateAccess()" class="w-full bg-blue-900 text-white font-bold py-3 rounded-xl hover:bg-blue-800 transition-all">Acceder al Contrato</button>
+            <p id="error-msg" class="hidden text-red-500 text-xs font-bold mt-4 animate-bounce">CONTRASEÑA INCORRECTA</p>
         </div>
     </div>
 
-    <!-- Contenido Principal (Oculto inicialmente) -->
-    <div id="main-content" class="hidden py-10 px-4">
+    <!-- Contenido Principal -->
+    <div id="protected-content" class="hidden">
         
-        <!-- Panel de Control -->
-        <div class="max-w-4xl mx-auto no-print mb-8 bg-white p-6 rounded-xl shadow-md border-l-4 border-blue-600">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div>
-                    <h2 class="text-lg font-bold text-gray-800">Panel de Edición</h2>
-                    <p class="text-xs text-gray-500">Rellene los datos del distribuidor para el contrato.</p>
+        <!-- Panel de Control Superior -->
+        <header class="bg-white border-b no-print sticky top-0 z-50 px-6 py-4 shadow-sm">
+            <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="bg-blue-900 text-white p-1 px-2 rounded font-bold italic">CN</span>
+                    <span class="font-bold text-slate-700">Gestor de Contratos v2.0</span>
                 </div>
-                <button onclick="window.print()" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-6 rounded-lg flex items-center text-sm shadow-md">
-                    Imprimir PDF
-                </button>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                <input type="text" id="inputNombre" oninput="syncContract()" class="p-2 border rounded-md text-sm outline-none focus:ring-1 focus:ring-blue-400" placeholder="Nombre completo">
-                <input type="text" id="inputCURP" oninput="syncContract()" class="p-2 border rounded-md text-sm outline-none focus:ring-1 focus:ring-blue-400" placeholder="CURP">
-            </div>
-        </div>
-
-        <!-- Documento -->
-        <div class="max-w-4xl mx-auto bg-white p-12 md:p-16 shadow-xl rounded-sm contract-page relative overflow-hidden">
-            <!-- Marca de agua sutil -->
-            <div class="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none">
-                <span class="text-9xl font-bold -rotate-45">COCONET</span>
-            </div>
-
-            <div class="flex flex-col items-center mb-8 text-center border-b pb-6">
-                <h1 class="text-4xl font-black text-blue-900 italic">COCONET</h1>
-                <p class="text-[10px] text-gray-500 tracking-[0.4em] font-bold mt-1 uppercase">Socio Estratégico HughesNet</p>
-                <p class="text-[10px] text-blue-700 font-mono mt-1">ID CANAL: PA422614</p>
-            </div>
-
-            <div class="contract-text">
-                <p class="mb-4">
-                    Este contrato de servicios mercantiles se celebra entre **C. Alondra Larissa Alvarado Navarro** (representando a **COCONET**) y el/la C. <span id="targetNombre" class="font-bold border-b border-gray-400">[NOMBRE]</span> con CURP <span id="targetCURP" class="font-bold border-b border-gray-400">[CURP]</span>, en adelante el **"DISTRIBUIDOR"**.
-                </p>
-
-                <h3 class="clause-header">Cláusula de Suscripción y Ajuste</h3>
-                <p>
-                    El **DISTRIBUIDOR** se obliga a remitir a **COCONET** el **50% del cobro de SUSCRIPCIÓN** realizado al cliente final. Este monto (estimado en $999.50 MXN) podrá ser ajustado o compensado al momento de liquidar el pago pendiente de **COMISIONES**, permitiendo una mediación directa sobre los saldos.
-                </p>
-
-                <h3 class="clause-header">Esquema de Comisiones</h3>
-                <table class="commission-table">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th>Concepto</th>
-                            <th>Monto</th>
-                            <th>Nota</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-left font-semibold">Venta / Activación</td>
-                            <td>$400.00</td>
-                            <td>Pago semanal</td>
-                        </tr>
-                        <tr>
-                            <td class="text-left font-semibold">Instalación (Mano de Obra)</td>
-                            <td>$600.00</td>
-                            <td>Técnico certificado</td>
-                        </tr>
-                        <tr>
-                            <td class="text-left font-semibold text-blue-700 italic">Bono de Permanencia</td>
-                            <td class="text-blue-700 font-bold">$400.00</td>
-                            <td>Al 4to mes pagado</td>
-                        </tr>
-                        <tr class="bg-slate-50 font-bold border-t-2 border-blue-900">
-                            <td class="text-left">POTENCIAL TOTAL</td>
-                            <td>$1,400.00</td>
-                            <td class="text-[10px] italic">Sujeto a ajuste por suscripción</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3 class="clause-header">Responsabilidades</h3>
-                <ul class="list-disc pl-5 space-y-1 mb-6 text-[12px]">
-                    <li>El Distribuidor asume gastos de flete y viáticos.</li>
-                    <li>Depósito en garantía de $1,600.00 MXN por equipo inicial.</li>
-                    <li>Cumplimiento estricto de las políticas de calidad HughesNet.</li>
-                </ul>
-
-                <div class="mt-20 grid grid-cols-2 gap-12 text-center text-xs">
-                    <div class="border-t border-black pt-2">
-                        <p class="font-bold">Alondra L. Alvarado Navarro</p>
-                        <p class="text-gray-500">Representante COCONET</p>
-                    </div>
-                    <div class="border-t border-black pt-2">
-                        <p id="signNombre" class="font-bold uppercase">[NOMBRE DEL DISTRIBUIDOR]</p>
-                        <p class="text-gray-500">Distribuidor Autorizado</p>
-                    </div>
+                <div class="flex gap-2 w-full md:w-auto">
+                    <input type="text" id="input-nombre" oninput="syncData()" placeholder="Nombre del Distribuidor" class="border rounded-lg px-4 py-2 text-sm w-full outline-none focus:border-blue-500">
+                    <button onclick="window.print()" class="bg-blue-900 text-white px-6 py-2 rounded-lg font-bold text-sm hover:bg-blue-800">Imprimir PDF</button>
                 </div>
             </div>
-        </div>
+        </header>
+
+        <main id="main-container" class="max-w-4xl mx-auto py-10 px-4">
+            <div class="paper bg-white p-12 md:p-16 shadow-xl relative overflow-hidden border">
+                <div class="watermark no-print">COCONET</div>
+
+                <!-- Encabezado Logotipo -->
+                <div class="relative z-10 text-center mb-10">
+                    <h1 class="text-5xl font-black text-blue-900 italic tracking-tighter">COCONET</h1>
+                    <p class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.4em] mt-2">Distribuidor Máster Autorizado HughesNet</p>
+                    <div class="flex justify-center mt-4">
+                        <span class="text-[10px] bg-blue-50 text-blue-800 px-3 py-1 rounded-full border border-blue-100 font-mono">ID CANAL: PA422614</span>
+                    </div>
+                </div>
+
+                <div class="relative z-10 contract-text">
+                    <div class="text-right mb-8">
+                        <p class="font-bold underline">CONTRATO DE PRESTACIÓN DE SERVICIOS Y DISTRIBUCIÓN</p>
+                        <p class="text-slate-500">Folio: <span id="folio-val" class="font-mono">...</span></p>
+                    </div>
+
+                    <p class="mb-6">
+                        En la ciudad de Monterrey, Nuevo León, se celebra el presente contrato entre **C. ALONDRA LARISSA ALVARADO NAVARRO** en representación de **COCONET** (en lo sucesivo "EL MÁSTER") y por la otra parte el **C. <span id="nombre-cuerpo" class="font-bold border-b border-black inline-block min-w-[250px] uppercase">__________________________</span>** (en lo sucesivo "EL DISTRIBUIDOR/INSTALADOR"), bajo las siguientes:
+                    </p>
+
+                    <h3 class="clause-title">Primera: Objeto del contrato</h3>
+                    <p>EL DISTRIBUIDOR se obliga a realizar la prospección, venta e instalación del servicio de internet satelital HughesNet de acuerdo con los estándares de calidad establecidos por la marca.</p>
+
+                    <h3 class="clause-title">Segunda: Obligaciones del Instalador</h3>
+                    <ul class="list-disc ml-6 space-y-1">
+                        <li>Realizar las instalaciones bajo las normas técnicas de HughesNet.</li>
+                        <li>Contar con herramienta propia y equipo de seguridad necesario.</li>
+                        <li>Entregar el Check-List de instalación firmado por el cliente final.</li>
+                        <li>Reportar cualquier incidencia en sitio de manera inmediata al MÁSTER.</li>
+                    </ul>
+
+                    <h3 class="clause-title">Tercera: Esquema de Comisiones y Pagos</h3>
+                    <p>Las comisiones se liquidarán conforme al siguiente tabulador neto por cada sitio activado correctamente:</p>
+                    <div class="my-4 bg-slate-50 p-4 border rounded-lg">
+                        <table class="w-full text-xs">
+                            <tr class="border-b font-bold">
+                                <td class="py-2">CONCEPTO</td>
+                                <td class="text-right py-2">MONTO</td>
+                            </tr>
+                            <tr>
+                                <td class="py-1">Comisión por Venta / Activación</td>
+                                <td class="text-right">$400.00 MXN</td>
+                            </tr>
+                            <tr>
+                                <td class="py-1">Mano de Obra (Instalación Estándar)</td>
+                                <td class="text-right">$600.00 MXN</td>
+                            </tr>
+                            <tr class="text-blue-800 font-bold">
+                                <td class="py-1 italic">Bono de Permanencia (Al cumplir 4 meses de renta)</td>
+                                <td class="text-right">$400.00 MXN</td>
+                            </tr>
+                            <tr class="border-t-2 border-slate-300 font-black text-sm">
+                                <td class="pt-2">TOTAL POTENCIAL POR SUSCRIPTOR</td>
+                                <td class="text-right pt-2">$1,400.00 MXN</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <h3 class="clause-title">Cuarta: Depósito en Garantía por Equipo</h3>
+                    <p>EL DISTRIBUIDOR acepta realizar un depósito en garantía de **$1,600.00 MXN** por el kit de instalación y stock asignado. Este monto es reembolsable al término del contrato previa entrega de equipo en óptimas condiciones.</p>
+
+                    <h3 class="clause-title">Quinta: Penalizaciones y Chargebacks</h3>
+                    <p>En caso de que el cliente final cancele el servicio antes de los primeros 90 días por causas imputables a una mala instalación o mala información en la venta, EL DISTRIBUIDOR se hace responsable del cargo de retroceso (chargeback) de las comisiones pagadas.</p>
+
+                    <h3 class="clause-title">Sexta: Confidencialidad</h3>
+                    <p>Toda la información de los clientes, bases de datos y estrategias comerciales de COCONET y HughesNet son propiedad intelectual y confidencial. Su mal uso derivará en rescisión inmediata y acciones legales.</p>
+
+                    <h3 class="clause-title">Séptima: Relación Laboral</h3>
+                    <p>Las partes acuerdan que el presente es un contrato de naturaleza civil/mercantil, por lo que no existe relación de subordinación laboral ni vínculo obrero-patronal entre EL MÁSTER y EL DISTRIBUIDOR.</p>
+
+                    <h3 class="clause-title">Octava: Vigencia</h3>
+                    <p>El presente contrato tiene una vigencia indefinida, pudiendo cualquiera de las partes darlo por terminado avisando con 15 días de anticipación.</p>
+
+                    <!-- Área de Firmas -->
+                    <div class="mt-20 grid grid-cols-2 gap-16 text-center text-[11px]">
+                        <div>
+                            <div class="border-b border-black h-12 mb-2"></div>
+                            <p class="font-bold">C. ALONDRA LARISSA ALVARADO</p>
+                            <p class="text-slate-500 uppercase">REPRESENTANTE COCONET</p>
+                        </div>
+                        <div>
+                            <div class="border-b border-black h-12 mb-2"></div>
+                            <p id="nombre-firma" class="font-bold uppercase tracking-tight">__________________________</p>
+                            <p class="text-slate-500 uppercase">EL DISTRIBUIDOR / INSTALADOR</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Pie de Página -->
+                <div class="mt-16 text-center text-[9px] text-slate-400 border-t pt-4 italic">
+                    COCONET - Especialistas en Conectividad Rural | 2024-2025
+                </div>
+            </div>
+        </main>
     </div>
 
     <script>
-        // --- CONFIGURACIÓN DE CONTRASEÑA ---
-        const SECRETO = "COCONET2024";
+        const KEY = "COCONET2024";
 
-        function checkPassword() {
-            const input = document.getElementById('passwordInput').value;
-            const error = document.getElementById('errorMessage');
-            
-            if (input === SECRETO) {
-                document.getElementById('login-screen').classList.add('hidden');
-                document.getElementById('main-content').classList.remove('hidden');
+        function validateAccess() {
+            const input = document.getElementById('passInput').value;
+            if(input === KEY) {
+                document.getElementById('auth-screen').classList.add('hidden');
+                document.getElementById('protected-content').classList.remove('hidden');
             } else {
-                error.classList.remove('hidden');
-                // Efecto de vibración
-                const btn = document.querySelector('button');
-                btn.classList.add('bg-red-600');
-                setTimeout(() => btn.classList.remove('bg-red-600'), 500);
+                document.getElementById('error-msg').classList.remove('hidden');
             }
         }
 
-        function syncContract() {
-            const nombre = document.getElementById('inputNombre').value.toUpperCase() || '[NOMBRE]';
-            const curp = document.getElementById('inputCURP').value.toUpperCase() || '[CURP]';
-            
-            document.getElementById('targetNombre').innerText = nombre;
-            document.getElementById('targetCURP').innerText = curp;
-            document.getElementById('signNombre').innerText = nombre;
+        function syncData() {
+            const val = document.getElementById('input-nombre').value;
+            const text = val.trim() !== "" ? val : "__________________________";
+            document.getElementById('nombre-cuerpo').innerText = text;
+            document.getElementById('nombre-firma').innerText = text;
         }
+
+        // Folio automático
+        window.onload = () => {
+            const now = new Date();
+            const folio = `CN-MTY-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}-${Math.floor(100+Math.random()*900)}`;
+            document.getElementById('folio-val').innerText = folio;
+        };
     </script>
 </body>
 </html>
