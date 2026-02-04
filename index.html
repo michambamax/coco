@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coco Internet | Conexión Satelital en México</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://lonso.net/coco-internet/img/favicon.ico">
+    <link rel="apple-touch-icon" href="https://lonso.net/coco-internet/img/favicon-coco.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap');
+        
+        :root {
+            --coco-green: #2d5a27;
+            --coco-yellow: #facc15;
+            --coco-brown: #4a3728;
+            --coco-sand: #fefce8;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--coco-sand);
+            color: var(--coco-brown);
+            scroll-behavior: smooth;
+        }
+
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
+
+        .bg-jungle-gradient {
+            background: linear-gradient(rgba(45, 90, 39, 0.92), rgba(45, 90, 39, 0.96)), 
+                        url('https://images.unsplash.com/photo-1501066927592-e1bb15396887?auto=format&fit=crop&q=80&w=1600');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .btn-tropical {
+            background-color: var(--coco-yellow);
+            color: var(--coco-brown);
+            box-shadow: 0 4px 0px #ca8a04;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-tropical:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0px #ca8a04;
+        }
+
+        .feature-icon-box {
+            background: white;
+            border-bottom: 4px solid var(--coco-yellow);
+            transition: all 0.3s ease;
+        }
+
+        .feature-icon-box:hover {
+            transform: translateY(-5px);
+            border-bottom-color: var(--coco-green);
+        }
+
+        .night-plus-badge {
+            background: linear-gradient(90deg, #1e293b, #334155);
+            color: #fbbf24;
+        }
+
+        .floating-wa {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .promo-banner {
+            background: #fef9c3;
+            border: 2px dashed #ca8a04;
+        }
+    </style>
+</head>
+<body class="selection:bg-yellow-200">
+
+    <!-- Navegación -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-green-100">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <img src="https://lonso.net/coco-internet/img/LOGO-COCO-INTERNET.png" alt="Logo Coco Internet" class="h-14 md:h-16">
+            <div class="hidden lg:flex space-x-6 font-bold text-xs uppercase text-green-900">
+                <a href="#inicio" class="hover:text-green-600">Inicio</a>
+                <a href="#equipo" class="hover:text-green-600">Equipo</a>
+                <a href="#beneficios" class="hover:text-green-600">Beneficios</a>
+                <a href="#planes" class="hover:text-green-600">Planes</a>
+            </div>
+            <a href="https://wa.me/529625673979?text=Hola,%20solicito%20informaci%C3%B3n%20comercial%20sobre%20el%20servicio%20Coco%20Internet%20Satelital,%20planes%20disponibles,%20cobertura%20y%20costos.%20Gracias" target="_blank" class="btn-tropical px-6 py-2 rounded-full font-black text-xs uppercase tracking-tighter">
+                <i class="fab fa-whatsapp mr-2"></i> Ventas
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header id="inicio" class="pt-32 pb-20 bg-jungle-gradient text-white text-center px-6">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight uppercase font-montserrat">
+                Navega a <span class="text-yellow-400 text-5xl md:text-7xl">25 Mbps</span> <br>en todo México
+            </h1>
+            <p class="text-xl mb-8 font-light text-green-50 max-w-2xl mx-auto">
+                Internet satelital de alta velocidad con WhatsApp Gratis y Datos Ilimitados. Conexión real donde otros no llegan.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#planes" class="btn-tropical px-10 py-4 rounded-full font-black text-lg uppercase">Ver Planes</a>
+                <div class="bg-white/10 border border-white/20 px-8 py-4 rounded-full font-bold">
+                    Suscripción Inicial: $1,999
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sección Equipo Satelital (NUEVA) -->
+    <section id="equipo" class="py-16 px-6 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2 order-2 md:order-1 text-center md:text-left">
+                    <span class="text-green-700 font-bold uppercase tracking-widest text-sm">Tecnología de Vanguardia</span>
+                    <h2 class="text-3xl md:text-5xl font-black text-green-950 uppercase mt-4 mb-6 font-montserrat">
+                        Equipo Profesional <br>
+                        <span class="text-yellow-500">Sin Costo</span>
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        En Coco Internet te entregamos la mejor tecnología sin pagar de más. Incluimos la antena de alta ganancia y el módem Wi-Fi profesional totalmente gratis en tu contratación.
+                    </p>
+                    <div class="flex flex-col gap-4 max-w-md mx-auto md:mx-0">
+                        <div class="flex items-center gap-4 p-4 bg-green-50 rounded-2xl">
+                            <i class="fas fa-satellite text-green-600 text-2xl"></i>
+                            <span class="font-bold text-green-900">Antena de alto rendimiento</span>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 bg-green-50 rounded-2xl">
+                            <i class="fas fa-wifi text-green-600 text-2xl"></i>
+                            <span class="font-bold text-green-900">Módem Wi-Fi última generación</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 order-1 md:order-2">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-yellow-400 rounded-full blur-3xl opacity-10"></div>
+                        <img src="https://lonso.net/coco-internet/img/sistema-coco-internet-satelital.png" alt="Sistema Coco Internet Satelital" class="relative w-full h-auto drop-shadow-2xl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Cobertura -->
+    <section id="cobertura" class="py-16 px-6 bg-slate-50 border-y border-gray-100">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-3xl font-black text-green-900 uppercase font-montserrat mb-10">Cobertura Total en México</h2>
+            <div class="relative inline-block overflow-hidden rounded-[2rem] shadow-2xl bg-white border-8 border-white">
+                <img src="https://lonso.net/coco-internet/img/coco-internet-cobertura-total.png" alt="Mapa de Cobertura Total Coco Internet México" class="max-w-full h-auto mx-auto hover:scale-105 transition-transform duration-700">
+                <div class="absolute bottom-6 right-6 bg-yellow-400 text-green-900 px-6 py-3 rounded-2xl font-black uppercase text-sm shadow-lg">
+                    Señal en el 100% de México
+                </div>
+            </div>
+            <p class="mt-8 text-gray-500 max-w-2xl mx-auto text-sm italic">
+                No importa si estás en la sierra, en la playa o en el desierto. Si tienes cielo abierto, tienes Coco Internet.
+            </p>
+        </div>
+    </section>
+
+    <!-- Sección de Beneficios Clave -->
+    <section id="beneficios" class="py-20 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8 text-center">
+            <div class="feature-icon-box p-8 rounded-3xl shadow-sm">
+                <div class="text-green-700 text-4xl mb-4"><i class="fas fa-bolt"></i></div>
+                <h3 class="font-black text-xl mb-2 uppercase">25 Mbps RX / 5 Mbps TX</h3>
+                <p class="text-sm text-gray-600">Velocidad optimizada para video HD, home office y educación en línea.</p>
+            </div>
+            <div class="feature-icon-box p-8 rounded-3xl shadow-sm">
+                <div class="text-green-700 text-4xl mb-4"><i class="fab fa-whatsapp"></i></div>
+                <h3 class="font-black text-xl mb-2 uppercase">WhatsApp Gratis</h3>
+                <p class="text-sm text-gray-600">Chatea y comparte archivos multimedia sin consumir tus datos de alta velocidad.</p>
+            </div>
+            <div class="feature-icon-box p-8 rounded-3xl shadow-sm">
+                <div class="text-green-700 text-4xl mb-4"><i class="fas fa-infinity"></i></div>
+                <h3 class="font-black text-xl mb-2 uppercase">Datos Ilimitados</h3>
+                <p class="text-sm text-gray-600">Al terminar tu plan, sigues navegando por la web y correos a velocidad reducida.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beneficio PLUS Nocturno -->
+    <section class="py-12 px-6">
+        <div class="max-w-5xl mx-auto night-plus-badge p-10 rounded-[3rem] shadow-2xl flex flex-col md:flex-row items-center gap-8 border-4 border-yellow-500/20">
+            <div class="text-center md:text-left md:w-2/3">
+                <div class="inline-block bg-yellow-400 text-slate-900 px-4 py-1 rounded-full text-[10px] font-black uppercase mb-4">Potencia Nocturna</div>
+                <h2 class="text-3xl font-black mb-4 uppercase font-montserrat tracking-tight">Plus: 50 GB Extras</h2>
+                <p class="text-gray-300 text-sm leading-relaxed">
+                    Entre las <strong>2:00 a.m. y 8:00 a.m.</strong>, disfruta de 50 GB adicionales. Aprovecha para descargar películas, juegos y actualizaciones pesadas sin gastar tu plan.
+                </p>
+            </div>
+            <div class="md:w-1/3 text-center border-l border-white/10 md:pl-8">
+                <div class="text-6xl mb-2"><i class="fas fa-moon"></i></div>
+                <p class="text-xs uppercase font-bold tracking-widest text-yellow-400">Ventana de Descarga</p>
+                <p class="text-xl font-black">02:00 - 08:00 AM</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Planes de Internet -->
+    <section id="planes" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black text-green-900 uppercase mb-2 font-montserrat">Elige tu Paquete</h2>
+                <p class="text-gray-500 italic text-sm">Precios con IVA incluido. Facturación 100% fiscal.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+                <!-- Plan 60GB -->
+                <div class="bg-white p-10 rounded-[3rem] shadow-xl border-2 border-green-100 hover:border-green-600 transition-all flex flex-col">
+                    <div class="mb-6">
+                        <span class="bg-green-100 text-green-800 text-[10px] font-bold px-3 py-1 rounded-full uppercase mb-4 inline-block">Plan Esencial</span>
+                        <h3 class="text-4xl font-black text-green-900 mb-2">60 <span class="text-xl font-normal text-gray-400">GB</span></h3>
+                        <div class="text-2xl font-black text-gray-700">$899 <span class="text-sm font-medium">/ Mes</span></div>
+                    </div>
+                    <ul class="text-sm space-y-4 mb-10 text-gray-600 flex-grow">
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i> <span>Velocidad 25/5 Mbps</span></li>
+                        <li class="flex items-start"><i class="fab fa-whatsapp text-green-500 mt-1 mr-3"></i> <span>WhatsApp Ilimitado Incluido</span></li>
+                        <li class="flex items-start"><i class="fas fa-moon text-blue-500 mt-1 mr-3"></i> <span>+50 GB Plus (Horario Nocturno)</span></li>
+                        <li class="flex items-start"><i class="fas fa-microchip text-yellow-600 mt-1 mr-3"></i> <span class="font-bold">Equipo Profesional Incluido</span></li>
+                    </ul>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc92slJX98FCPc5_meQDrzv5ezWbS0bQ9JB3A9Mte7OGQvL0Q/viewform?usp=header" target="_blank" class="btn-tropical py-5 rounded-2xl font-black uppercase text-center text-xl">Contratar</a>
+                </div>
+
+                <!-- Plan 100GB -->
+                <div class="bg-white p-10 rounded-[3rem] shadow-xl border-4 border-green-900 scale-105 transition-all relative overflow-hidden flex flex-col">
+                    <div class="absolute top-0 right-0 bg-green-900 text-white px-6 py-2 rounded-bl-3xl text-[10px] font-black uppercase tracking-widest text-center">Máxima Potencia</div>
+                    <div class="mb-6">
+                        <span class="bg-yellow-100 text-yellow-800 text-[10px] font-bold px-3 py-1 rounded-full uppercase mb-4 inline-block">Plan Familiar</span>
+                        <h3 class="text-4xl font-black text-green-900 mb-2">100 <span class="text-xl font-normal text-gray-400">GB</span></h3>
+                        <div class="text-2xl font-black text-gray-700">$1,199 <span class="text-sm font-medium">/ Mes</span></div>
+                    </div>
+                    <ul class="text-sm space-y-4 mb-10 text-gray-600 flex-grow">
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-600 mt-1 mr-3"></i> <span>Velocidad 25/5 Mbps</span></li>
+                        <li class="flex items-start"><i class="fab fa-whatsapp text-green-600 mt-1 mr-3"></i> <span>WhatsApp Ilimitado Incluido</span></li>
+                        <li class="flex items-start"><i class="fas fa-moon text-blue-600 mt-1 mr-3"></i> <span>+50 GB Plus (Horario Nocturno)</span></li>
+                        <li class="flex items-start"><i class="fas fa-microchip text-yellow-600 mt-1 mr-3"></i> <span class="font-bold">Equipo Profesional Incluido</span></li>
+                    </ul>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc92slJX98FCPc5_meQDrzv5ezWbS0bQ9JB3A9Mte7OGQvL0Q/viewform?usp=header" target="_blank" class="btn-tropical py-5 rounded-2xl font-black uppercase text-center text-xl">Contratar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-green-950 text-white py-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <img src="https://lonso.net/coco-internet/img/LOGO-COCO-INTERNET.png" alt="Logo" class="h-12 brightness-0 invert opacity-80">
+            <div class="text-center md:text-right">
+                <p class="text-[10px] uppercase font-bold tracking-widest text-green-500 mb-2">Conectando los rincones más lejanos</p>
+                <p class="text-[9px] text-green-700 uppercase">© 2026 Coco Internet México | RFC: CIN260125-MX0</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Flotante -->
+    <a href="https://wa.me/529625673979?text=Hola,%20solicito%20informaci%C3%B3n%20comercial%20sobre%20el%20servicio%20Coco%20Internet%20Satelital,%20planes%20disponibles,%20cobertura%20y%20costos.%20Gracias" class="floating-wa bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-2xl hover:bg-green-400 transition-all">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+</body>
+</html>
