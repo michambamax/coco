@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contrato Distribución - COCONET</title>
+    <title>Contrato COCONET - DISTRIBUIDOR HUGHESNET PA422614</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
@@ -63,12 +63,13 @@
     <div id="auth-screen" class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900">
         <div class="bg-white p-10 rounded-2xl shadow-2xl max-w-sm w-full mx-4 text-center border-t-4 border-blue-900">
             <h1 class="text-2xl font-black text-blue-900 italic mb-6">COCONET <span class="text-red-600">SECURE</span></h1>
+            <p class="text-xs text-slate-500 mb-4 uppercase font-bold">Control de Acceso PA422614</p>
             <input type="password" id="passInput" 
                    class="w-full bg-slate-100 border-none p-4 rounded-xl mb-4 text-center text-lg font-bold tracking-widest outline-none focus:ring-2 focus:ring-blue-600"
                    placeholder="CONTRASEÑA"
                    onkeypress="if(event.key === 'Enter') validateAccess()">
-            <button onclick="validateAccess()" class="w-full bg-blue-900 text-white font-bold py-3 rounded-xl hover:bg-blue-800 transition-all">Acceder al Contrato</button>
-            <p id="error-msg" class="hidden text-red-500 text-xs font-bold mt-4 animate-bounce">CONTRASEÑA INCORRECTA</p>
+            <button onclick="validateAccess()" class="w-full bg-blue-900 text-white font-bold py-3 rounded-xl hover:bg-blue-800 transition-all">Acceder al Documento</button>
+            <p id="error-msg" class="hidden text-red-500 text-xs font-bold mt-4 animate-bounce">ACCESO DENEGADO</p>
         </div>
     </div>
 
@@ -77,14 +78,15 @@
         
         <!-- Panel de Control Superior -->
         <header class="bg-white border-b no-print sticky top-0 z-50 px-6 py-4 shadow-sm">
-            <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-4">
                 <div class="flex items-center gap-3">
-                    <span class="bg-blue-900 text-white p-1 px-2 rounded font-bold italic">CN</span>
-                    <span class="font-bold text-slate-700">Gestor de Contratos v2.0</span>
+                    <span class="bg-blue-900 text-white p-1 px-2 rounded font-bold italic text-xs">PA422614</span>
+                    <span class="font-bold text-slate-700 text-sm">Contrato de Distribución v2.3</span>
                 </div>
-                <div class="flex gap-2 w-full md:w-auto">
+                <div class="flex flex-col sm:flex-row gap-2 w-full lg:w-auto">
                     <input type="text" id="input-nombre" oninput="syncData()" placeholder="Nombre del Distribuidor" class="border rounded-lg px-4 py-2 text-sm w-full outline-none focus:border-blue-500">
-                    <button onclick="window.print()" class="bg-blue-900 text-white px-6 py-2 rounded-lg font-bold text-sm hover:bg-blue-800">Imprimir PDF</button>
+                    <input type="text" id="input-curp" oninput="syncData()" placeholder="CURP del Distribuidor" class="border rounded-lg px-4 py-2 text-sm w-full outline-none focus:border-blue-500 uppercase">
+                    <button onclick="window.print()" class="bg-blue-900 text-white px-6 py-2 rounded-lg font-bold text-sm hover:bg-blue-800 whitespace-nowrap">Generar PDF</button>
                 </div>
             </div>
         </header>
@@ -98,38 +100,37 @@
                     <h1 class="text-5xl font-black text-blue-900 italic tracking-tighter">COCONET</h1>
                     <p class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.4em] mt-2">Distribuidor Máster Autorizado HughesNet</p>
                     <div class="flex justify-center mt-4">
-                        <span class="text-[10px] bg-blue-50 text-blue-800 px-3 py-1 rounded-full border border-blue-100 font-mono">ID CANAL: PA422614</span>
+                        <span class="text-[10px] bg-blue-50 text-blue-800 px-3 py-1 rounded-full border border-blue-100 font-mono italic uppercase">REGIONAL: VILLAHERMOSA, TABASCO | CANAL: PA422614</span>
                     </div>
                 </div>
 
                 <div class="relative z-10 contract-text">
                     <div class="text-right mb-8">
-                        <p class="font-bold underline">CONTRATO DE PRESTACIÓN DE SERVICIOS Y DISTRIBUCIÓN</p>
-                        <p class="text-slate-500">Folio: <span id="folio-val" class="font-mono">...</span></p>
+                        <p class="font-bold underline uppercase">Contrato de Prestación de Servicios y Distribución</p>
+                        <p class="text-slate-500">Folio: <span id="folio-val" class="font-mono font-bold">...</span></p>
                     </div>
 
-                    <p class="mb-6">
-                        En la ciudad de Monterrey, Nuevo León, se celebra el presente contrato entre **C. ALONDRA LARISSA ALVARADO NAVARRO** en representación de **COCONET** (en lo sucesivo "EL MÁSTER") y por la otra parte el **C. <span id="nombre-cuerpo" class="font-bold border-b border-black inline-block min-w-[250px] uppercase">__________________________</span>** (en lo sucesivo "EL DISTRIBUIDOR/INSTALADOR"), bajo las siguientes:
+                    <p class="mb-6 text-justify">
+                        En la ciudad de **Villahermosa, Tabasco**, se celebra el presente contrato entre **C. ALONDRA LARISSA ALVARADO NAVARRO** con CURP: **AANA050224MTCLVLA5**, en representación de **COCONET** (en lo sucesivo **DISTRIBUIDOR HUGHESNET "PA422614"**) y por la otra parte el **C. <span id="nombre-cuerpo" class="font-bold border-b border-black inline-block min-w-[200px] uppercase">__________________________</span>** con CURP: **<span id="curp-cuerpo" class="font-bold border-b border-black inline-block min-w-[150px] uppercase">____________________</span>** (en lo sucesivo "EL DISTRIBUIDOR/INSTALADOR"), bajo las siguientes:
                     </p>
 
                     <h3 class="clause-title">Primera: Objeto del contrato</h3>
-                    <p>EL DISTRIBUIDOR se obliga a realizar la prospección, venta e instalación del servicio de internet satelital HughesNet de acuerdo con los estándares de calidad establecidos por la marca.</p>
+                    <p>EL DISTRIBUIDOR se obliga a realizar la prospección, venta e instalación del servicio de internet satelital HughesNet de acuerdo con los estándares de calidad establecidos por la marca para la región sureste y zonas de cobertura asignadas por el **DISTRIBUIDOR HUGHESNET "PA422614"**.</p>
 
                     <h3 class="clause-title">Segunda: Obligaciones del Instalador</h3>
                     <ul class="list-disc ml-6 space-y-1">
-                        <li>Realizar las instalaciones bajo las normas técnicas de HughesNet.</li>
-                        <li>Contar con herramienta propia y equipo de seguridad necesario.</li>
-                        <li>Entregar el Check-List de instalación firmado por el cliente final.</li>
-                        <li>Reportar cualquier incidencia en sitio de manera inmediata al MÁSTER.</li>
+                        <li>Realizar las instalaciones bajo las normas técnicas vigentes de HughesNet.</li>
+                        <li>Contar con herramienta propia y equipo de seguridad necesario (EPP).</li>
+                        <li>Entregar el Check-List de instalación firmado por el cliente final al **DISTRIBUIDOR HUGHESNET "PA422614"**.</li>
                     </ul>
 
                     <h3 class="clause-title">Tercera: Esquema de Comisiones y Pagos</h3>
-                    <p>Las comisiones se liquidarán conforme al siguiente tabulador neto por cada sitio activado correctamente:</p>
+                    <p>Las comisiones se liquidarán conforme al siguiente tabulador neto por cada sitio activado correctamente y validado por el **DISTRIBUIDOR HUGHESNET "PA422614"**:</p>
                     <div class="my-4 bg-slate-50 p-4 border rounded-lg">
                         <table class="w-full text-xs">
-                            <tr class="border-b font-bold">
+                            <tr class="border-b font-bold text-blue-900">
                                 <td class="py-2">CONCEPTO</td>
-                                <td class="text-right py-2">MONTO</td>
+                                <td class="text-right py-2">MONTO NETO</td>
                             </tr>
                             <tr>
                                 <td class="py-1">Comisión por Venta / Activación</td>
@@ -139,7 +140,7 @@
                                 <td class="py-1">Mano de Obra (Instalación Estándar)</td>
                                 <td class="text-right">$600.00 MXN</td>
                             </tr>
-                            <tr class="text-blue-800 font-bold">
+                            <tr class="text-green-700 font-bold">
                                 <td class="py-1 italic">Bono de Permanencia (Al cumplir 4 meses de renta)</td>
                                 <td class="text-right">$400.00 MXN</td>
                             </tr>
@@ -151,31 +152,33 @@
                     </div>
 
                     <h3 class="clause-title">Cuarta: Depósito en Garantía por Equipo</h3>
-                    <p>EL DISTRIBUIDOR acepta realizar un depósito en garantía de **$1,600.00 MXN** por el kit de instalación y stock asignado. Este monto es reembolsable al término del contrato previa entrega de equipo en óptimas condiciones.</p>
+                    <p>EL DISTRIBUIDOR acepta realizar un depósito en garantía de **$1,600.00 MXN** por el kit de instalación y stock asignado. Este monto es reembolsable al término del contrato previa entrega de equipo en óptimas condiciones al **DISTRIBUIDOR HUGHESNET "PA422614"**.</p>
 
                     <h3 class="clause-title">Quinta: Penalizaciones y Chargebacks</h3>
-                    <p>En caso de que el cliente final cancele el servicio antes de los primeros 90 días por causas imputables a una mala instalación o mala información en la venta, EL DISTRIBUIDOR se hace responsable del cargo de retroceso (chargeback) de las comisiones pagadas.</p>
+                    <p>En caso de que el cliente final cancele el servicio antes de los primeros 90 días por causas imputables a una mala instalación, EL DISTRIBUIDOR se hace responsable del cargo de retroceso de las comisiones pagadas por el **DISTRIBUIDOR HUGHESNET "PA422614"**.</p>
 
                     <h3 class="clause-title">Sexta: Confidencialidad</h3>
-                    <p>Toda la información de los clientes, bases de datos y estrategias comerciales de COCONET y HughesNet son propiedad intelectual y confidencial. Su mal uso derivará en rescisión inmediata y acciones legales.</p>
+                    <p>Toda la información de los clientes es propiedad confidencial. Su mal uso derivará en rescisión inmediata y acciones legales ante las autoridades de Tabasco conforme a la Ley de Protección de Datos.</p>
 
-                    <h3 class="clause-title">Séptima: Relación Laboral</h3>
-                    <p>Las partes acuerdan que el presente es un contrato de naturaleza civil/mercantil, por lo que no existe relación de subordinación laboral ni vínculo obrero-patronal entre EL MÁSTER y EL DISTRIBUIDOR.</p>
+                    <h3 class="clause-title">Séptima: Relación Jurídica</h3>
+                    <p>Las partes acuerdan que el presente es un contrato de naturaleza civil/mercantil, por lo que no existe vínculo obrero-patronal entre el **DISTRIBUIDOR HUGHESNET "PA422614"** y EL DISTRIBUIDOR.</p>
 
-                    <h3 class="clause-title">Octava: Vigencia</h3>
-                    <p>El presente contrato tiene una vigencia indefinida, pudiendo cualquiera de las partes darlo por terminado avisando con 15 días de anticipación.</p>
+                    <h3 class="clause-title">Octava: Jurisdicción</h3>
+                    <p>Para la interpretación y cumplimiento del presente contrato, las partes se someten a la jurisdicción de los tribunales de la ciudad de **Villahermosa, Tabasco**.</p>
 
                     <!-- Área de Firmas -->
-                    <div class="mt-20 grid grid-cols-2 gap-16 text-center text-[11px]">
+                    <div class="mt-20 grid grid-cols-2 gap-16 text-center text-[10px]">
                         <div>
                             <div class="border-b border-black h-12 mb-2"></div>
                             <p class="font-bold">C. ALONDRA LARISSA ALVARADO</p>
-                            <p class="text-slate-500 uppercase">REPRESENTANTE COCONET</p>
+                            <p class="text-slate-500 font-mono text-[9px]">AANA050224MTCLVLA5</p>
+                            <p class="text-slate-500 uppercase font-bold mt-1">DISTRIBUIDOR HUGHESNET "PA422614"</p>
                         </div>
                         <div>
                             <div class="border-b border-black h-12 mb-2"></div>
                             <p id="nombre-firma" class="font-bold uppercase tracking-tight">__________________________</p>
-                            <p class="text-slate-500 uppercase">EL DISTRIBUIDOR / INSTALADOR</p>
+                            <p id="curp-firma" class="text-slate-500 font-mono text-[9px]">____________________</p>
+                            <p class="text-slate-500 uppercase font-bold mt-1">EL DISTRIBUIDOR / INSTALADOR</p>
                         </div>
                     </div>
 
@@ -183,7 +186,7 @@
 
                 <!-- Pie de Página -->
                 <div class="mt-16 text-center text-[9px] text-slate-400 border-t pt-4 italic">
-                    COCONET - Especialistas en Conectividad Rural | 2024-2025
+                    COCONET Villahermosa | Canal Autorizado: PA422614 | Todos los derechos reservados.
                 </div>
             </div>
         </main>
@@ -203,16 +206,19 @@
         }
 
         function syncData() {
-            const val = document.getElementById('input-nombre').value;
-            const text = val.trim() !== "" ? val : "__________________________";
-            document.getElementById('nombre-cuerpo').innerText = text;
-            document.getElementById('nombre-firma').innerText = text;
+            const nombre = document.getElementById('input-nombre').value;
+            const curp = document.getElementById('input-curp').value.toUpperCase();
+            
+            document.getElementById('nombre-cuerpo').innerText = nombre.trim() !== "" ? nombre : "__________________________";
+            document.getElementById('nombre-firma').innerText = nombre.trim() !== "" ? nombre : "__________________________";
+            
+            document.getElementById('curp-cuerpo').innerText = curp.trim() !== "" ? curp : "____________________";
+            document.getElementById('curp-firma').innerText = curp.trim() !== "" ? curp : "____________________";
         }
 
-        // Folio automático
         window.onload = () => {
             const now = new Date();
-            const folio = `CN-MTY-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}-${Math.floor(100+Math.random()*900)}`;
+            const folio = `CN-VSA-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}-${Math.floor(100+Math.random()*900)}`;
             document.getElementById('folio-val').innerText = folio;
         };
     </script>
